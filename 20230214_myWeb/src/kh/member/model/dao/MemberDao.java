@@ -2,6 +2,7 @@ package kh.member.model.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import kh.common.jdbc.JdbcTemplate;
@@ -34,6 +35,76 @@ public class MemberDao {
 		}
 		System.out.println("DAO return : " + result);
 		return result;
+	}
+	
+	
+	public MemberVO login(Connection conn, MemberVO mvo) {
+		MemberVO  m = new MemberVO();
+		m = null;
+		
+		String query = "SELECT ID, NAME, EMAIL FROM TEST_MEMBER";
+		query += "WHERE ID = ? AND PASSWD = ?";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, mvo.getId());
+			pstmt.setString(2, mvo.getPasswd());
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				m.setId(rs.getString("ID"));
+				m.setName(rs.getString("NAME"));
+				m.setEmail(rs.getString("EMAIL"));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JdbcTemplate.close(rs);
+			JdbcTemplate.close(pstmt);
+		}
+		
+		
+		return m;
+	}
+	
+	public MemberVO myinfo(Connection conn, String id) {
+		MemberVO  m = new MemberVO();
+		m = null;
+		
+		String query = "SELECT ID, NAME, EMAIL FROM TEST_MEMBER";
+		query += "WHERE ID = ?";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				m.setId(rs.getString("ID"));
+				m.setName(rs.getString("NAME"));
+				m.setEmail(rs.getString("EMAIL"));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JdbcTemplate.close(rs);
+			JdbcTemplate.close(pstmt);
+		}
+		
+		
+		return m;
 	}
 
 }
