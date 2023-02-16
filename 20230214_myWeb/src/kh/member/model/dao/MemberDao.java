@@ -39,16 +39,16 @@ public class MemberDao {
 	
 	
 	public MemberVO login(Connection conn, MemberVO mvo) {
-		MemberVO  m = new MemberVO();
-		m = null;
+		MemberVO  m = null;
 		
 		String query = "SELECT ID, NAME, EMAIL FROM TEST_MEMBER";
-		query += "WHERE ID = ? AND PASSWD = ?";
+		query += " WHERE ID = ? AND PASSWD = ?";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
 		try {
+			m = new MemberVO();
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, mvo.getId());
 			pstmt.setString(2, mvo.getPasswd());
@@ -74,16 +74,16 @@ public class MemberDao {
 	}
 	
 	public MemberVO myinfo(Connection conn, String id) {
-		MemberVO  m = new MemberVO();
-		m = null;
+		MemberVO  m = null;
 		
 		String query = "SELECT ID, NAME, EMAIL FROM TEST_MEMBER";
-		query += "WHERE ID = ?";
+		query += " WHERE ID = ?";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
 		try {
+			m = new MemberVO();
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, id);
 			

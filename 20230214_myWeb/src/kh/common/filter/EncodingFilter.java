@@ -10,7 +10,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 
 
-public class EncodingFiler implements Filter{
+public class EncodingFilter implements Filter{
 	
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)

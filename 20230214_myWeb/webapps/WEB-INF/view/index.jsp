@@ -13,13 +13,20 @@
 <body>
 	<%@include file="/WEB-INF/view/header.jsp" %>
 	
-	
 	<h1> 메인 페이지</h1>
+
+	<c:if test="${not empty lgnss}">
+		<button id="myinfo" class="btn myinfo">내정보보기</button>	
+	</c:if>
+	<hr>
+	<%@include file="/WEB-INF/view/board/boardList.jsp" %>
 	
-	<script type="text/javascript">
+	
+
+<script type="text/javascript">
 		$(".btn.login").on("click", handlerClickBtnLogin);
 		$(".btn.logout").on("click", handlerClickBtnLogout);
-		$(".btn.logout").on("click", handlerClickBtnMyinfo);
+		$(".btn.myinfo").on("click", handlerClickBtnMyinfo);
 		
 		
 		function handlerClickBtnLogin(){
@@ -28,17 +35,12 @@
 		}
 		function handlerClickBtnLogout(){
 			console.log("btnlogout 버튼 눌림");
+			location.href = "<%=request.getContextPath()%>/logout";
 		}
 		function handlerClickBtnMyinfo(){
 			console.log("myinfo 버튼 눌림");
 			location.href = "<%=request.getContextPath()%>/myinfo";
 		}
-	</script>
-	
-	<c:if test=" ${not empty lgnss}"></c:if>
-	<button type="button">
-			내정보보기
-	</button>
-
+</script>
 </body>
 </html>

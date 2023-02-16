@@ -33,9 +33,13 @@ public class MyinfoController extends HttpServlet {
 			id = ((MemberVO)request.getSession().getAttribute("lgnss")).getId();
 		}
 		if(id != null) {
-			request.setAttribute("myifo", new MemberService().myinfo(id));
-		}		
-		request.getRequestDispatcher("/WEB-INF/view/member/myinfo.jsp").forward(request, response);
+			request.setAttribute("myinfo", new MemberService().myinfo(id));
+			request.getRequestDispatcher("/WEB-INF/view/member/myinfo.jsp").forward(request, response);
+		}else {
+			request.setAttribute("errorMsg", "로그인이 되지 않아 정보를 확인 할 수 없습니다.");
+			request.getRequestDispatcher("/WEB-INF/view/error/error_login.jsp").forward(request, response);
+		}
+		
 	}
 
 }
