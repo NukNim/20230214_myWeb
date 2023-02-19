@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kh.board.model.service.BoardService;
+
 /**
  * Servlet implementation class HomeController
  */
@@ -29,7 +31,7 @@ public class HomeController extends HttpServlet {
 		
 		
 		
-		
+		request.setAttribute("boardlist", new BoardService().getBoardList());
 		request.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(request, response);
 	}
 
